@@ -47,12 +47,12 @@ class ScrapingResponse(BaseModel):
 class InputURL(BaseModel):
     url: str
 chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+# chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 def scraping_reviews(url):
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+    driver = webdriver.Chrome( options=chrome_options)
     
     
     all_reviews = []
@@ -98,7 +98,7 @@ async def scrape_reviewsss(request: SearchRequest):
     score=[]
  
     
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+    driver = webdriver.Chrome( options=chrome_options)
 
     driver.get(urls)
     page_source = driver.page_source
@@ -264,7 +264,7 @@ async def scrape_reviewsss(request: SearchRequest):
    
 @app.post("/scrape_trustpilot/")
 async def scrape_reviewss(request: ScrapingRequest):
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
     score=[]
     all_reviews = []
     all_headings = []
